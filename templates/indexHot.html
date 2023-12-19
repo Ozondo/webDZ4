@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="listOfAnswersOrQuestions">
+     <div class="headerOfListOfQuestions">
+         <a href="{% url 'index' %}" style="margin: 10px; color: black;">New Questions</a>
+         <h2><a href="{% url 'hot' %}" style="margin: 10px; color: black;">Hot Questions</a></h2>
+     </div>
+
+    {% for question in items %}
+
+        {% include 'components/questionItem.html' %}
+
+    {% endfor %}
+
+    {% include 'components/pagination.html' %}
+
+</div>
+
+{% endblock %}

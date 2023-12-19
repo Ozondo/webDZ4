@@ -1,0 +1,51 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="listOfAnswersOrQuestions">
+
+    <div class="contentOfMainQuestion">
+        <div>
+            <div class="imageOfUserMainQuestion">
+                <a><img class="imageOfUserMainQuestion" src="{% static question.author.avatar.url %}"></a>
+            </div>
+            <div class="counterOfLikes" style="margin: 5px;">
+                <div style="margin:5px;">{{ question.rating }}</div>
+                <button class="pageButton">&#8593;</button>
+                <button class="pageButton" style="margin-left: -7px;">&#8595</button>
+            </div>
+        </div>
+        <div class="infoOfAnswer">
+            <h4>{{ question.title }}</h4>
+            <p>{{ question.text }}</p>
+            <div class="bottomOfInfoOfQuestion">
+                <div class="tagsOfQuestion" style="margin: 0px 5px;">
+                    Tags:
+                    {% for tag in question.tags.all %}
+                        <a class="tag" href="{% url 'tag' s=tag %}">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    {% for answer in items %}
+        {% include 'components/answerItem.html' %}
+    {% endfor %}
+
+    <hr>
+
+    {% include 'components/pagination.html' %}
+
+    <form method="post">
+            {% csrf_token %}
+        {{ form }}
+<!--        <textarea class="formInput" style="width: 100%;" rows="5" maxlength="1000" placeholder="Enter your answer here (max 1000 symbols)"></textarea>-->
+        <button class="pageButton" style="width: 100px;">Answer</button>
+    </form>
+</div>
+
+{% endblock %}

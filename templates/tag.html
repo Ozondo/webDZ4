@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="listOfAnswersOrQuestions">
+     <div class="headerOfListOfQuestions">
+         <h2>Tag: {{ tag.text }}</h2>
+     </div>
+
+    {% for question in items %}
+
+        {% include 'components/questionItem.html' %}
+
+    {% endfor %}
+
+    {% include 'components/pagination.html' %}
+
+</div>
+
+{% endblock %}
